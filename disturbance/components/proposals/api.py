@@ -172,6 +172,7 @@ from rest_framework_datatables.renderers import DatatablesRenderer
 from disturbance.components.main.process_document import (
         process_generic_document, 
         )
+from disturbance.components.proposals.permissions import ProposalInternalUserPermission
 
 
 import logging
@@ -2942,6 +2943,7 @@ class ProposalRequirementViewSet(viewsets.ModelViewSet):
     #queryset = ProposalRequirement.objects.all()
     queryset = ProposalRequirement.objects.none()
     serializer_class = ProposalRequirementSerializer
+    permission_classes = [ProposalInternalUserPermission]
 
     def get_queryset(self):
         user = self.request.user
