@@ -1677,7 +1677,7 @@ class ApiaryInternalProposalSerializer(BaseProposalSerializer):
                 #'district',
                 'title',
                 'data',
-                'schema',
+                #'schema',
                 'customer_status',
                 'processing_status',
                 'review_status',
