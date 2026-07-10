@@ -332,7 +332,7 @@ class ProposalSerializer(BaseProposalSerializer):
         except:
             return False
 
-class SaveProposalSerializer(BaseProposalSerializer):
+class CreateProposalSerializer(BaseProposalSerializer):
     assessor_data = serializers.JSONField(required=False)
 
     class Meta:
@@ -355,6 +355,55 @@ class SaveProposalSerializer(BaseProposalSerializer):
                 'refresh_timestamp',
                 'prefill_timestamp',
                 'schema',
+                'customer_status',
+                'processing_status',
+                'review_status',
+                #'hard_copy',
+                'applicant',
+                'proxy_applicant',
+                'submitter',
+                'assigned_officer',
+                'previous_application',
+                'lodgement_date',
+                'documents',
+                'requirements',
+                'readonly',
+                'can_user_edit',
+                'can_user_view',
+                'has_prefilled_once',
+                'reference',
+                'lodgement_number',
+                'lodgement_sequence',
+                'can_officer_process',
+                'sub_activity_level1',
+                'sub_activity_level2',
+                'management_area',
+                )
+        read_only_fields=('documents','requirements')
+
+class SaveProposalSerializer(BaseProposalSerializer):
+    assessor_data = serializers.JSONField(required=False)
+
+    class Meta:
+        model = Proposal
+        fields = (
+                'id',
+                'application_type',
+                'activity',
+                'approval_level',
+                'title',
+                'region',
+                'district',
+                'tenure',
+                'data',
+                'assessor_data',
+                'comment_data',
+                'add_info_applicant',
+                'add_info_assessor',
+                'history_add_info_assessor',
+                'refresh_timestamp',
+                'prefill_timestamp',
+                #'schema',
                 'customer_status',
                 'processing_status',
                 'review_status',

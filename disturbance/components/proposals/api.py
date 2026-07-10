@@ -95,6 +95,7 @@ from disturbance.components.proposals.serializers import (
     ProposalTypeSerializer,
     ProposalSerializer,
     InternalProposalSerializer,
+    CreateProposalSerializer,
     SaveProposalSerializer,
     ProposalUserActionSerializer,
     ProposalLogEntrySerializer,
@@ -2544,10 +2545,10 @@ class ProposalViewSet(viewsets.ModelViewSet):
                     proxy_applicant = request.user.id
                 else:
                     applicant = request.data.get('behalf_of')
-
+                
                 data = {
                     #'schema': qs_proposal_type.order_by('-version').first().schema,
-                    'schema': proposal_type.schema,
+                    'schema': proposal_type.schema if not application_type.name in ['Apiary', 'Temporary Use', 'Site Transfer'] else '[{}]',
                     'submitter': request.user.id,
                     'applicant': applicant,
                     'proxy_applicant': proxy_applicant,
@@ -2562,7 +2563,7 @@ class ProposalViewSet(viewsets.ModelViewSet):
                     'data': [
                     ],
                 }
-                serializer = SaveProposalSerializer(data=data)
+                serializer = CreateProposalSerializer(data=data)
                 serializer.is_valid(raise_exception=True)
                 proposal_obj = serializer.save()
 
